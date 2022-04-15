@@ -36,7 +36,7 @@ namespace LightLib.Web.Controllers {
                         Results = allAssets 
                     }
                 };
-
+                
                 return View(viewModel);
             }
             
