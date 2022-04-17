@@ -26,7 +26,7 @@ namespace LightLib.Web.Controllers {
             _holdService = holdService;
         }
 
-        public async Task<IActionResult> Index([FromQuery] int page, [FromQuery] int perPage) {
+        public async Task<IActionResult> Index([FromQuery] int page = 1, [FromQuery] int perPage = 10) {
             var paginationServiceResult = await _assetsService.GetPaginated(page, perPage);
 
             if (paginationServiceResult != null && paginationServiceResult.Results.Any()) {

@@ -4,31 +4,49 @@
 }
 
 <h2 class="lms-section-heading">
-    Library Assets 
+    Library Assets
 </h2>
 
 <div class="row">
     <section>
         <p>
             <strong>Assets</strong> make up the collection of all resources a library can loan across all branches.
-        </p> 
+        </p>
         <p>
             Use this page to add, update, or remove Assets, see checkout queues, and mark items as lost or found.
         </p>
     </section>
 </div>
 
+
 <div class="row">
     <div class="col-12">
         <button class="btn btn-primary btn-sm">
-            Add New Asset 
+            Add New Asset
         </button>
-        <button class="btn btn-primary btn-sm">
-            Edit 
-        </button>
-        <button class="btn btn-primary btn-sm">
-            Delete 
-        </button>
+
+
+        <h3>Create a new Book</h3>
+        <form onsubmit="createBook(event)">
+            <label for="title">Title</label>
+            <input id="title" type="text" value="Alice in Wonderland" />
+            <br />
+
+            <label for="Author">Author</label>
+            <input id="Author" type="text" value="Author" />
+            <br />
+
+            <label for="ISBN">ISBN</label>
+            <input id="ISBN" type="text" value="abc-abc" />
+            <br />
+
+            <label for="PubliciationYear">Publication Date</label>
+            <input id="PublicationYear" type="text" value="1649" />
+            <br />
+
+            <input type="submit" value="Submit" />
+            <br />
+        </form>
 
     </div>
 </div>
@@ -38,38 +56,80 @@
 <div class="row">
     <div class="container container-fluid">
         <nav aria-label="Asset Table Navigation Top">
-          <ul class="pagination justify-content-end">
-            <li class="page-item small"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item small"><a class="page-link" href="#">Next</a></li>
-          </ul>
+            <ul class="pagination justify-content-end">
+                <li class="page-item small"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item small"><a class="page-link" href="#">Next</a></li>
+            </ul>
         </nav>
         <table class="table table-sm table-responsive-sm">
             <thead class="thead-dark">
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Title</th>
-                <th scope="col">Status</th>
-                <th scope="col">Location</th>
-            </tr>
+                <tr>
+                    <th scope="col">AssetId</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Publication Year</th>
+                    <th scope="col">Language</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var asset in Model.PageOfAssets.Results) {
-                <tr>
-                    <th scope="row">@asset.Id</th>
-                    <td>@asset.Title</td>
-                    <td>@asset.Status.Name</td>
-                    <td>@asset.Location.Name</td>
-                </tr>
-            }
+                @foreach (var asset in Model.PageOfAssets.Results)
+                {
+                    <tr>
+                        <th scope="row">@asset.Id</th>
+                        <td>@asset.Title</td>
+                        <td>@asset.Status.Name</td>
+                        <td>@asset.Location.Name</td>
+                    </tr>
+                }
             </tbody>
         </table>
         <nav aria-label="Asset Table Navigation Bottom">
-          <ul class="pagination justify-content-end">
-            <li class="page-item small"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item small"><a class="page-link" href="#">Next</a></li>
-          </ul>
+            <ul class="pagination justify-content-end">
+                <li class="page-item small"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item small"><a class="page-link" href="#">Next</a></li>
+            </ul>
         </nav>
     </div>
 </div>
 
+<script>
+        var createBook = (event) => {
+            event.preventDefault();
+
+            console.log("title", document.getElementById("title").value);
+            var book = {
+                Id: 0,
+                AssetId: 0,
+                Title: document.getElementById("title").value,
+                Author: document.getElementById("Author").value,
+                ISBN: document.getElementById("ISBN").value,
+                PublicationYear: document.getElementById("PublicationYear"),
+                Edition: "3",
+                Publisher: "the best publisher",
+                DeweyIndex: "120.65",
+                Language: "en",
+                Summary: "no summary could describe how good this book is"
+
+            }
+
+            console.log("the book is:", book);
+
+
+            const xhr = new XMLHttpRequest();
+
+
+            xhr.open("POST", "https://localhost:5432/Books/Add");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify(book));
+
+            xhr.onerror = function(error) {
+                console.log("Error:", error);
+            }
+
+
+        }
+
+</script>
 
