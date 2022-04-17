@@ -84,7 +84,7 @@
                     <tr>
                         <th scope="row">@asset.Id</th>
                         <td>@asset.Title</td>
-                        <td>@asset.Status.Name</td>
+                        @* <td>@asset.Status.Name</td> *@
                         <td>@asset.Location.Name</td>
                     </tr>
                 }
@@ -100,42 +100,44 @@
 </div>
 
 <script>
-        var createBook = (event) => {
-            event.preventDefault();
 
-            console.log("title", document.getElementById("title").value);
-            var book = {
-                Id: 0,
-                AssetId: 0,
-                Title: document.getElementById("title").value,
-                Author: document.getElementById("Author").value,
-                ISBN: document.getElementById("ISBN").value,
-                PublicationYear: document.getElementById("PublicationYear"),
-                Edition: "3",
-                Publisher: "the best publisher",
-                DeweyIndex: "120.65",
-                Language: "en",
-                Summary: "no summary could describe how good this book is"
+    var createBook = (event) => {
+        event.preventDefault();
 
-            }
-
-            console.log("the book is:", book);
-
-
-            const xhr = new XMLHttpRequest();
-
-
-            xhr.open("POST", "https://localhost:5432/Books/Add");
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(JSON.stringify(book));
-
-            xhr.onerror = function(error) {
-                console.log("Error:", error);
-            }
-
+        console.log("title", document.getElementById("title").value);
+        var book = {
+            Id: 1,
+            AssetId: "899e0016-2e32-450d-aab1-4ae130aa1717",
+            Title: document.getElementById("title").value,
+            Author: document.getElementById("Author").value,
+            ISBN: document.getElementById("ISBN").value,
+            PublicationYear: 1643,
+            Edition: "3",
+            Publisher: "the best publisher",
+            DeweyIndex: "120.65",
+            Language: "en",
+            Summary: "no summary could describe how good this book is"
 
         }
+
+        console.log("the book is:", book);
+
+
+        const xhr = new XMLHttpRequest();
+
+
+        xhr.open("POST", "http://localhost:8000/Book/NewBook");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        console.log(JSON.stringify(book));
+        xhr.send(JSON.stringify(book));
+
+        xhr.onerror = function(error) {
+            console.log("Error:", error);
+        }
+
+
+    }
 
 </script>
 

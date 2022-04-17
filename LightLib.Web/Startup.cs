@@ -1,5 +1,6 @@
 ﻿using LightLib.Data;
 using LightLib.Service.Assets;
+using LightLib.Service.Books;
 using LightLib.Service.Branches;
 using LightLib.Service.Checkout;
 using LightLib.Service.Interfaces;
@@ -37,6 +38,7 @@ namespace LightLib.Web {
             services.AddScoped<ILibraryCardService, LibraryCardService>();
             services.AddScoped<IPatronService, PatronService>();
             services.AddScoped<IStatusService, StatusService>();
+            services.AddScoped<IBookService, BookService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {

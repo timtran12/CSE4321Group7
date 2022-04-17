@@ -18,8 +18,9 @@ namespace LightLib.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<bool> NewBook (BookDto book)
+        public async Task<bool> NewBook ([FromBody] BookDto book)
         {
+
             return await _bookService.Add(book);
         }
 
