@@ -4,25 +4,53 @@
 }
 
 <h2 class="lms-section-heading">
-    Library Assets 
+    Library Assets
 </h2>
 
 <div class="row">
     <section>
         <p>
             <strong>Assets</strong> make up the collection of all resources a library can loan across all branches.
-        </p> 
+        </p>
         <p>
             Use this page to add, update, or remove Assets, see checkout queues, and mark items as lost or found.
         </p>
     </section>
 </div>
 
+
 <div class="row">
     <div class="col-12">
         <button class="btn btn-primary btn-sm">
-            Add New Asset 
+            Add New Asset
         </button>
+
+
+        <h3>Create a new Book</h3>
+
+        <label for="Id">Id</label>
+        <input id="Id" type="text" value="" />
+        <br />
+
+        <label for="AvailabilityStatusId">AvailabilityStatusId</label>
+        <input id="AvailabilityStatusId" type="text" value "active" />
+        <br />
+
+        <label for="Cost">Cost</label>
+        <input id="Cost" type="text" value "" />
+        <br />
+
+        <label for="ImageUrl">ImageUrl</label>
+        <input id="ImageUrl" type="text" value "www.url.com" />
+        <br />
+
+        <label for="LocationId">LocationId</label>
+        <input id="LocationId" type="text" value "desktop" />
+        <br />
+
+        <input type="submit" value="Submit" />
+        <br />
+
     </div>
 </div>
 
@@ -31,38 +59,53 @@
 <div class="row">
     <div class="container container-fluid">
         <nav aria-label="Asset Table Navigation Top">
-          <ul class="pagination justify-content-end">
-            <li class="page-item small"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item small"><a class="page-link" href="#">Next</a></li>
-          </ul>
+            <ul class="pagination justify-content-end">
+                <li class="page-item small"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item small"><a class="page-link" href="#">Next</a></li>
+            </ul>
         </nav>
         <table class="table table-sm table-responsive-sm">
             <thead class="thead-dark">
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Title</th>
-                <th scope="col">Status</th>
-                <th scope="col">Location</th>
-            </tr>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">AvailabilityStatusId</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">ImageUrl</th>
+                    <th scope="col">LocationId</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var asset in Model.PageOfAssets.Results) {
-                <tr>
-                    <th scope="row">@asset.Id</th>
-                    <td>@asset.Title</td>
-                    <td>@asset.Status.Name</td>
-                    <td>@asset.Location.Name</td>
-                </tr>
-            }
+                @foreach (var asset in Model.PageOfAssets.Results)
+                {
+                    <tr>
+                        <th scope="row">@asset.Id</th>
+                        <td>@asset.Cost</td>
+                        <td>@asset.ImageUrl</td>
+                    </tr>
+                }
             </tbody>
         </table>
         <nav aria-label="Asset Table Navigation Bottom">
-          <ul class="pagination justify-content-end">
-            <li class="page-item small"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item small"><a class="page-link" href="#">Next</a></li>
-          </ul>
+            <ul class="pagination justify-content-end">
+                <li class="page-item small"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item small"><a class="page-link" href="#">Next</a></li>
+            </ul>
         </nav>
     </div>
 </div>
 
+<script>
+        var createID = {event} => {
+            event.preventDefault();
+
+            console.log("Id", document.getElementById("Id").value);
+            var assetID = {
+                Id: document.getElementById("Id").value,
+                AvailabilityStatusId: document.getElementById("AvailabilityStatusId").value,
+                Cost: document.getElementById("Cost").value,
+                ImageUrl: document.getElementById("ImageUrl").value,
+                LocationId: document.getElementById("LocationId").value
+            }
+        }
+</script>
 
