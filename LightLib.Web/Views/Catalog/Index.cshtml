@@ -27,29 +27,26 @@
 
 
         <h3>Create a new Book</h3>
+        <form onsubmit="createBook(event)">
+            <label for="title">Title</label>
+            <input id="title" type="text" value="Alice in Wonderland" />
+            <br />
 
-        <label for="Id">Id</label>
-        <input id="Id" type="text" value="" />
-        <br />
+            <label for="Author">Author</label>
+            <input id="Author" type="text" value="Author" />
+            <br />
 
-        <label for="AvailabilityStatusId">AvailabilityStatusId</label>
-        <input id="AvailabilityStatusId" type="text" value "active" />
-        <br />
+            <label for="ISBN">ISBN</label>
+            <input id="ISBN" type="text" value="abc-abc" />
+            <br />
 
-        <label for="Cost">Cost</label>
-        <input id="Cost" type="text" value "" />
-        <br />
+            <label for="PubliciationYear">Publication Date</label>
+            <input id="PublicationYear" type="text" value="1649" />
+            <br />
 
-        <label for="ImageUrl">ImageUrl</label>
-        <input id="ImageUrl" type="text" value "www.url.com" />
-        <br />
-
-        <label for="LocationId">LocationId</label>
-        <input id="LocationId" type="text" value "desktop" />
-        <br />
-
-        <input type="submit" value="Submit" />
-        <br />
+            <input type="submit" value="Submit" />
+            <br />
+        </form>
 
     </div>
 </div>
@@ -67,11 +64,12 @@
         <table class="table table-sm table-responsive-sm">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">AvailabilityStatusId</th>
-                    <th scope="col">Cost</th>
-                    <th scope="col">ImageUrl</th>
-                    <th scope="col">LocationId</th>
+                    <th scope="col">AssetId</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Publication Year</th>
+                    <th scope="col">Language</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,8 +77,9 @@
                 {
                     <tr>
                         <th scope="row">@asset.Id</th>
-                        <td>@asset.Cost</td>
-                        <td>@asset.ImageUrl</td>
+                        <td>@asset.Title</td>
+                        <td>@asset.Status.Name</td>
+                        <td>@asset.Location.Name</td>
                     </tr>
                 }
             </tbody>
@@ -95,17 +94,42 @@
 </div>
 
 <script>
-        var createID = {event} => {
+        var createBook = (event) => {
             event.preventDefault();
 
-            console.log("Id", document.getElementById("Id").value);
-            var assetID = {
-                Id: document.getElementById("Id").value,
-                AvailabilityStatusId: document.getElementById("AvailabilityStatusId").value,
-                Cost: document.getElementById("Cost").value,
-                ImageUrl: document.getElementById("ImageUrl").value,
-                LocationId: document.getElementById("LocationId").value
+            console.log("title", document.getElementById("title").value);
+            var book = {
+                Id: 0,
+                AssetId: 0,
+                Title: document.getElementById("title").value,
+                Author: document.getElementById("Author").value,
+                ISBN: document.getElementById("ISBN").value,
+                PublicationYear: document.getElementById("PublicationYear"),
+                Edition: "3",
+                Publisher: "the best publisher",
+                DeweyIndex: "120.65",
+                Language: "en",
+                Summary: "no summary could describe how good this book is"
+
             }
+
+            console.log("the book is:", book);
+
+
+            const xhr = new XMLHttpRequest();
+
+
+            xhr.open("POST", "https://localhost:5432/Books/Add");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify(book));
+
+            xhr.onerror = function(error) {
+                console.log("Error:", error);
+            }
+
+
         }
+
 </script>
 
