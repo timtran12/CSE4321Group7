@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using LightLib.Data;
+using LightLib.Data.Models;
 using LightLib.Data.Models.Assets;
 using LightLib.Models;
 using LightLib.Models.DTOs;
@@ -29,6 +30,14 @@ namespace LightLib.Service.Assets {
         {
             var newAsset = _mapper.Map<Asset>(assetDto);
             newAsset.Location = _context.LibraryBranches.First(b => b.Id == newAsset.Location.Id);
+            newAsset.AvailabilityStatus = new AvailabilityStatus()
+            {
+                Id = assetDto.Status.Id,
+                Name = "temp",
+                Description = "temp",
+            };
+            newAsset.AvailabilityStatus = _context.Statuses.First(a => a.Id == assetDto.Status.Id);
+
             await _context.AddAsync(newAsset);
             await _context.SaveChangesAsync();
             return true;
