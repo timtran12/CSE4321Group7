@@ -1,7 +1,9 @@
+@using LightLib.Data.Models.Assets
 @model LightLib.Web.Models.Catalog.AssetIndexModel
 @{
     ViewBag.Title = "Library Assets";
 }
+
 
 <h2 class="lms-section-heading">
     Library Assets
@@ -54,41 +56,80 @@
 
 <hr />
 
+
+                            
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Edit</h2>
+        </div>
+        <div class="modal-body">
+            <form onsubmit="editAsset(); return false;">
+                <label for="editId">Id</label>
+                <input id="editId" type="text"/>
+                <br />
+
+                <label for="editCost">Cost</label>
+                <input id="editCost" type="text"/>
+                <br />
+
+                <label for="editImageUrl">Image Url</label>
+                <input id="editImageUrl" type="text"/>
+                <br />
+
+                <label for="editLocation">Location</label>
+                <input id="editLocation" type="text"/>
+                <br />
+
+                <input type="submit" value="Submit" />
+                <br />
+            </form>
+        </div>
+ 
+    </div>
+</div>
+
+
 <div class="row">
     <div class="container container-fluid">
         <table class="table table-sm table-responsive-sm">
             <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Cost</th>
-                    <th scope="col">Image Url</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
-                </tr>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Image Url</th>
+                <th scope="col">Location</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var asset in Model.PageOfAssets.Results)
-                {
-                    <tr>
-                        <th scope="row">@asset.Id</th>
-                        <td>@asset.Cost</td>
-                        <td>@asset.ImageUrl</td>
-                        <td>@asset.Location.Name</td>
-                        <td scope="col">
-                            <button onclick="editAsset('@asset.Id')" class="btn btn-primary btn-sm">
-                                Edit
-                            </button>
-                        </td>
-                        <td scope="col">
-                            <button onclick="deleteAsset('@asset.Id')" class="btn btn-primary btn-sm">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                }
+            @foreach (var asset in Model.PageOfAssets.Results)
+            {
+                <tr>
+                    <th scope="row">@asset.Id</th>
+                    <td>@asset.Cost</td>
+                    <td>@asset.ImageUrl</td>
+                    <td>@asset.Location.Name</td>
+                    <td scope="col">
+                        <button onclick="openEdit('@asset.Id')" class="btn btn-primary btn-sm">
+                            Edit
+                        </button>
+                    </td>
+                    <td scope="col">
+                        <button onclick="deleteAsset('@asset.Id')" class="btn btn-primary btn-sm">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
             </tbody>
         </table>
+
         <nav aria-label="Asset Table Navigation Bottom">
             @{
                 var previousPage = (Model.PageOfAssets.PageNumber - 1);
@@ -152,15 +193,69 @@
 
     }
 
+    var modal = document.getElementById("myModal");
 
-    function editAsset(assetId) {
+
+    var span = document.getElementById("close")[0];
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    function openEdit(assetId) {
         console.log("TEST EDIT");
         console.log(assetId);
 
+        modal.style.display = "block";
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
 
+        document.getElementById("editId").value = assetId;
 
 
     }
+
+    function editAsset() {
+        const assetId = document.getElementById("editId").value;
+        console.log("EDIT STILL HAS:", assetId);
+
+
+        var editedAsset = {
+            Id: assetId,
+            Title: "dab",
+            Year: 123,
+            Status: {
+                Id: 0,
+                Name: "test",
+                Description: "this is a description"
+            },
+            Cost: 15.00,
+            ImageUrl: "ab.png",
+            NumberOfCopies: 3,
+            AssetType: 1,
+            Location: {
+                Id: 4,
+                Name: "temp",
+                Address: "temp",
+                Telephone: "temp"
+            }
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8000/Catalog/Edit");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        console.log(JSON.stringify(editedAsset));
+        xhr.send(JSON.stringify(editedAsset));
+
+        xhr.onerror = function(error) {
+            console.log("Error:", error);
+        }
+
+    }
+
 
     function deleteAsset(assetId) {
         console.log("TEST DELETE");

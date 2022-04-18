@@ -12,8 +12,11 @@ namespace LightLib.Service.Interfaces {
 
         Task<bool> DeleteAsset(Guid assetId);
 
+        Task<bool> EditAsset(LibraryAssetDto newDto);
+
         Task<LibraryBranchDto> GetCurrentLocation(Guid assetId);
         Task<bool> MarkLost(Guid assetId);
         Task<bool> MarkFound(Guid assetId);
+
     }
 }

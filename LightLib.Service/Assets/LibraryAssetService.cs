@@ -43,6 +43,15 @@ namespace LightLib.Service.Assets {
 
         }
 
+        public async Task<bool> EditAsset(LibraryAssetDto assetDto)
+        {
+            var newAsset = _mapper.Map<Asset>(assetDto);
+            _context.Entry(newAsset).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+
         public async Task<LibraryAssetDto> Get(Guid assetId) {
             var asset = await _context.LibraryAssets
                 .Include(a => a.AvailabilityStatus)

@@ -102,9 +102,9 @@ namespace LightLib.Web.Controllers {
 
         // POST: /Catalog/Edit/
         [HttpPost]
-        public async Task<bool> Edit([Bind(Include = "Id,Cost,ImageUrl,Location")] LibraryAssetDto assetDto)
+        public async Task<bool> Edit([FromBody] LibraryAssetDto assetDto)
         {
-
+            return await _assetsService.EditAsset(assetDto);
         }
 
 
