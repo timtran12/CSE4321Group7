@@ -1552,3 +1552,22 @@
 2022-04-17 17:08:35.5270 Info Adding target FileTarget(Name=allfile)
 2022-04-17 17:08:35.5337 Info Adding target FileTarget(Name=ownFile-web)
 2022-04-17 17:08:35.5598 Info Validating config: TargetNames=allfile, ownFile-web, ConfigItems=45, FilePath=C:\Users\Richard\Desktop\Coding\CSE4321Group7\LightLib.Web\bin\Debug\net5.0\nlog.config
+2022-04-17 17:56:29.3480 Info Message Template Auto Format enabled
+2022-04-17 17:56:29.3586 Info Loading assembly: NLog.Web.AspNetCore
+2022-04-17 17:56:29.4059 Info Adding target FileTarget(Name=allfile)
+2022-04-17 17:56:29.4059 Info Adding target FileTarget(Name=ownFile-web)
+2022-04-17 17:56:29.4306 Info Validating config: TargetNames=allfile, ownFile-web, ConfigItems=45, FilePath=C:\Users\timtr\CSE4321\LightLib.Web\bin\Debug\net5.0\NLog.config
+2022-04-17 17:56:29.4501 Info Configuration initialized.
+2022-04-17 17:56:29.4501 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.7.12472. Product version: 4.7.7+3755739d37c1ec92bac4de2cefad68a0f5ea7ec1. GlobalAssemblyCache: False
+2022-04-17 17:56:31.3806 Info AppDomain Shutting down. Logger closing...
+2022-04-17 17:56:31.3994 Info Logger has been shut down.
+2022-04-17 17:57:26.4994 Info Message Template Auto Format enabled
+2022-04-17 17:57:26.5444 Info Loading assembly: NLog.Web.AspNetCore
+2022-04-17 17:57:26.6195 Info Adding target FileTarget(Name=allfile)
+2022-04-17 17:57:26.6490 Info Adding target FileTarget(Name=ownFile-web)
+2022-04-17 17:57:26.7166 Info Validating config: TargetNames=allfile, ownFile-web, ConfigItems=45, FilePath=C:\Users\timtr\CSE4321\LightLib.Web\bin\Debug\net5.0\nlog.config
+2022-04-17 18:32:06.8655 Info Message Template Auto Format enabled
+2022-04-17 18:32:06.9297 Info Loading assembly: NLog.Web.AspNetCore
+2022-04-17 18:32:07.0653 Info Adding target FileTarget(Name=allfile)
+2022-04-17 18:32:07.0965 Info Adding target FileTarget(Name=ownFile-web)
+2022-04-17 18:32:07.2205 Info Validating config: TargetNames=allfile, ownFile-web, ConfigItems=45, FilePath=C:\Users\timtr\CSE4321\LightLib.Web\bin\Debug\net5.0\nlog.config
