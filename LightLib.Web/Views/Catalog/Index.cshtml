@@ -105,32 +105,38 @@
         event.preventDefault();
 
         console.log("title", document.getElementById("title").value);
-        var book = {
-            Id: 1,
-            AssetId: "899e0016-2e32-450d-aab1-4ae130aa1717",
-            Title: document.getElementById("title").value,
-            Author: document.getElementById("Author").value,
-            ISBN: document.getElementById("ISBN").value,
-            PublicationYear: 1643,
-            Edition: "3",
-            Publisher: "the best publisher",
-            DeweyIndex: "120.65",
-            Language: "en",
-            Summary: "no summary could describe how good this book is"
+        var asset = {
+            Id: "0",
+            Title: "dab",
+            Year: 123,
+            Status: {
+                Id: 0,
+                Name: "test",
+                Description: "this is a description"
+            },
+            Cost: 12.00,
+            ImageUrl: "dab.png",
+            NumberOfCopies: 3,
+            AssetType: 1,
+            Location: {
+                Id: 3,
+                Name: "temp",
+                Address: "temp",
+                Telephone: "temp"
+            }
+        }   
 
-        }
-
-        console.log("the book is:", book);
+        console.log("the asset is:", asset);
 
 
         const xhr = new XMLHttpRequest();
 
-
-        xhr.open("POST", "http://localhost:8000/Book/NewBook");
+        xhr.open("POST", "http://localhost:8000/Catalog/NewAsset");
         xhr.setRequestHeader("Accept", "application/json");
         xhr.setRequestHeader("Content-Type", "application/json");
-        console.log(JSON.stringify(book));
-        xhr.send(JSON.stringify(book));
+        console.log(JSON.stringify(asset));
+
+        xhr.send(JSON.stringify(asset));
 
         xhr.onerror = function(error) {
             console.log("Error:", error);

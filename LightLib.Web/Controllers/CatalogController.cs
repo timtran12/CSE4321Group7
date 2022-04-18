@@ -88,5 +88,14 @@ namespace LightLib.Web.Controllers {
             await _holdService.PlaceHold(assetGuid, libraryCardId);
             return RedirectToAction("Detail", new {id = assetId});
         }
+
+
+        [HttpPost]
+        public async Task<bool> NewAsset([FromBody] LibraryAssetDto assetDto)
+        {
+            Guid g = new Guid();
+            assetDto.Id = g.ToString();
+            return await _assetsService.Add(assetDto);
+        }
     }
 }
