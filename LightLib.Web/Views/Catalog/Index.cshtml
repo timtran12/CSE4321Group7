@@ -153,7 +153,6 @@
     var createAsset = (event) => {
         event.preventDefault();
 
-        console.log("title", document.getElementById("title").value);
         var asset = {
             Id: "0",
             Title: "dab",
@@ -163,12 +162,12 @@
                 Name: "test",
                 Description: "this is a description"
             },
-            Cost: 12.00,
-            ImageUrl: "dab.png",
+            Cost: document.getElementById("cost").value,
+            ImageUrl: document.getElementById("imageurl").value.toString(),
             NumberOfCopies: 3,
             AssetType: 1,
             Location: {
-                Id: 3,
+                Id: document.getElementById("location").value,
                 Name: "temp",
                 Address: "temp",
                 Telephone: "temp"
@@ -231,12 +230,12 @@
                 Name: "test",
                 Description: "this is a description"
             },
-            Cost: 15.00,
-            ImageUrl: "ab.png",
+            Cost: document.getElementById("editCost").value,
+            ImageUrl: document.getElementById("editImageUrl").value.toString(),
             NumberOfCopies: 3,
             AssetType: 1,
             Location: {
-                Id: 4,
+                Id: document.getElementById("editLocation").value,
                 Name: "temp",
                 Address: "temp",
                 Telephone: "temp"
