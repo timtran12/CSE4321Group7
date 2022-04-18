@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -24,8 +25,13 @@ namespace LightLib.Service.Assets {
             _mapper = mapper;
         }
 
-        public async Task<bool> Add(LibraryAssetDto assetDto) {
+        public async Task<bool> Add(LibraryAssetDto assetDto)
+        {
             var newAsset = _mapper.Map<Asset>(assetDto);
+            Debug.WriteLine("NEW ASSET IS HERE:", newAsset);
+            newAsset.Location = _context.LibraryBranches.First(b => b.Id == newAsset.Location.Id);
+            Debug.WriteLine(newAsset.Location.Id);
+            Debug.WriteLine(newAsset.Location.Name);
             await _context.AddAsync(newAsset);
             await _context.SaveChangesAsync();
             return true;
