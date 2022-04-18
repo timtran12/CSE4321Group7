@@ -32,22 +32,22 @@
         </button>
 
 
-        <h3>Create a new Book</h3>
+        <h3>Create a new Asset</h3>
         <form onsubmit="createBook(event)">
-            <label for="title">Title</label>
-            <input id="title" type="text" value="Alice in Wonderland" />
+            <label for="id">Id</label>
+            <input id="id" type="text"/>
             <br />
 
-            <label for="Author">Author</label>
-            <input id="Author" type="text" value="Author" />
+            <label for="cost">Cost</label>
+            <input id="cost" type="text"/>
             <br />
 
-            <label for="ISBN">ISBN</label>
-            <input id="ISBN" type="text" value="abc-abc" />
+            <label for="imageurl">Image Url</label>
+            <input id="imageurl" type="text"/>
             <br />
 
-            <label for="PublicationYear">Publication Date</label>
-            <input id="PublicationYear" type="text" value="1649" />
+            <label for="location">Location</label>
+            <input id="location" type="text"/>
             <br />
 
             <input type="submit" value="Submit" />
@@ -65,7 +65,6 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Availability Status</th>
                     <th scope="col">Cost</th>
                     <th scope="col">Image Url</th>
                     <th scope="col">Location</th>
@@ -76,7 +75,6 @@
                 {
                     <tr>
                         <th scope="row">@asset.Id</th>
-                        <td>@asset.Status.Id</td>
                         <td>@asset.Cost</td>
                         <td>@asset.ImageUrl</td>
                         <td>@asset.Location.Name</td>
