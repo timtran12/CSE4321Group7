@@ -34,6 +34,15 @@ namespace LightLib.Service.Assets {
             return true;
         }
 
+        public async Task<bool> DeleteAsset(Guid assetId)
+        {
+            Asset asset = _context.LibraryAssets.Find(assetId);
+            _context.LibraryAssets.Remove(asset);
+            await _context.SaveChangesAsync();
+            return true;
+
+        }
+
         public async Task<LibraryAssetDto> Get(Guid assetId) {
             var asset = await _context.LibraryAssets
                 .Include(a => a.AvailabilityStatus)

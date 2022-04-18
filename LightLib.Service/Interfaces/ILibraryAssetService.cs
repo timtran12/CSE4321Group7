@@ -9,6 +9,9 @@ namespace LightLib.Service.Interfaces {
         Task<PaginationResult<LibraryAssetDto>> GetPaginated(int page, int perPage);
         Task<LibraryAssetDto> Get(Guid assetId);
         Task<bool> Add(LibraryAssetDto newDto);
+
+        Task<bool> DeleteAsset(Guid assetId);
+
         Task<LibraryBranchDto> GetCurrentLocation(Guid assetId);
         Task<bool> MarkLost(Guid assetId);
         Task<bool> MarkFound(Guid assetId);

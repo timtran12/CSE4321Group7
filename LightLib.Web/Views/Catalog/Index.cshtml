@@ -24,16 +24,11 @@
         <button class="btn btn-primary btn-sm">
             Add New Asset
         </button>
-        <button class="btn btn-primary btn-sm">
-            Edit
-        </button>
-        <button class="btn btn-primary btn-sm">
-            Delete
-        </button>
+
 
 
         <h3>Create a new Asset</h3>
-        <form onsubmit="createBook(event)">
+        <form onsubmit="createAsset(event)">
             <label for="id">Id</label>
             <input id="id" type="text"/>
             <br />
@@ -68,6 +63,8 @@
                     <th scope="col">Cost</th>
                     <th scope="col">Image Url</th>
                     <th scope="col">Location</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,6 +75,16 @@
                         <td>@asset.Cost</td>
                         <td>@asset.ImageUrl</td>
                         <td>@asset.Location.Name</td>
+                        <td scope="col">
+                            <button onclick="editAsset('@asset.Id')" class="btn btn-primary btn-sm">
+                                Edit
+                            </button>
+                        </td>
+                        <td scope="col">
+                            <button onclick="deleteAsset('@asset.Id')" class="btn btn-primary btn-sm">
+                                Delete
+                            </button>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -102,7 +109,7 @@
 </div>
 
 <script>
-    var createBook = (event) => {
+    var createAsset = (event) => {
         event.preventDefault();
 
         console.log("title", document.getElementById("title").value);
@@ -138,6 +145,33 @@
         console.log(JSON.stringify(asset));
 
         xhr.send(JSON.stringify(asset));
+
+        xhr.onerror = function(error) {
+            console.log("Error:", error);
+        }
+
+    }
+
+
+    function editAsset(assetId) {
+        console.log("TEST EDIT");
+        console.log(assetId);
+
+
+
+
+    }
+
+    function deleteAsset(assetId) {
+        console.log("TEST DELETE");
+        console.log(assetId);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8000/Catalog/Delete");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        console.log(JSON.stringify(assetId));
+        xhr.send(JSON.stringify(assetId));
 
         xhr.onerror = function(error) {
             console.log("Error:", error);

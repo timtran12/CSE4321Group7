@@ -97,5 +97,30 @@ namespace LightLib.Web.Controllers {
             assetDto.Id = g.ToString();
             return await _assetsService.Add(assetDto);
         }
+
+
+
+        // POST: /Catalog/Edit/
+        [HttpPost]
+        public async Task<bool> Edit([Bind(Include = "Id,Cost,ImageUrl,Location")] LibraryAssetDto assetDto)
+        {
+
+        }
+
+
+        // POST: /Catalog/Delete
+        [HttpPost, ActionName("Delete")]
+        public async Task<bool> DeleteConfirmed([FromBody] Guid id)
+        {
+
+            return await _assetsService.DeleteAsset(id);
+
+        }
+
+
+
+
+
+
     }
 }
